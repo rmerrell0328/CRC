@@ -1,0 +1,90 @@
+﻿@using DevExtreme.AspNet.Mvc
+
+@*
+    @inject LdapSignInManager SignInManager
+    @inject LdapUserManager UserManager
+*@
+
+@{ }
+
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CRC</title>
+    <link rel="shortcut icon"  href="~/favicon.ico">
+
+        <!-- DevExtreme themes -->
+        @*<link rel="stylesheet" href="css/dx.light.css">*@
+        @*<link rel="stylesheet" href="~/css/devextreme/bootstrap.css" />*@
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.4/css/dx.common.css">
+        <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.4/css/dx.light.css">
+
+        <link rel="stylesheet" href="~/css/slider.css">
+        <link rel="stylesheet" href="~/css/site.css">
+
+        <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
+        @*<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBEvdeuODQcwUBRWt7S3ArE0_WmmMxU7aU"></script>*@
+
+        <!-- DevExtreme library
+        <script type="text/javascript" src="~/js/devextreme/cldr.js"></script>
+        <script type="text/javascript" src="~/js/devextreme/cldr/event.js"></script>
+        <script type="text/javascript" src="~/js/devextreme/cldr/supplemental.js"></script>
+        <script type="text/javascript" src="~/js/devextreme/cldr/unresolved.js"></script>
+        <script type="text/javascript" src="~/js/devextreme/globalize.js"></script>
+        <script type="text/javascript" src="~/js/devextreme/globalize/message.js"></script>
+        <script type="text/javascript" src="~/js/devextreme/globalize/number.js"></script>
+        <script type="text/javascript" src="~/js/devextreme/globalize/currency.js"></script>
+        <script type="text/javascript" src="~/js/devextreme/globalize/date.js"></script>
+
+        <script type="text/javascript" src="~/js/devextreme/jszip.js"></script>-->
+        @*<script type="text/javascript" src="~/js/devextreme/dx.all.debug.js"></script>*@
+        <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/19.2.4/js/dx.all.js"></script>
+
+        @*<script type="text/javascript" src="~/js/devextreme/dx.aspnet.mvc.js"></script>*@
+        @*<script src="/node_modules/devextreme/dist/js/dx.aspnet.mvc.js"></script>*@
+        <script src="https://cdn3.devexpress.com/jslib/19.2.4/js/dx.aspnet.mvc.js" integrity="sha384-VRSaQ9Go7BQ7rzoNmwWNBSy0vdN866M/QDw4yhZAQKVTy0HRlbwsoebbdEBDihVB sha512-/ueaXGOn33Sc+L0yKs+glCRh2GjWB1KChvzZew44tXwGZxtrHFRBEgil6T690uw5Q5g3ejWrbcixYPqA2t4YYg==" crossorigin="anonymous"></script>
+
+        @*<script type="text/javascript" src="~/js/devextreme/dx.aspnet.data.js"></script>*@
+        <script src="https://unpkg.com/devextreme-aspnet-data/js/dx.aspnet.data.js"></script>
+        @*<script src="/node_modules/devextreme-aspnet-data/js/dx.aspnet.data.js"></script>*@
+
+        <!-- Site specific -->
+        <script type="text/javascript" src="~/js/site.js"></script>
+
+        <!-- Common and language-specific CLDR data -->
+        @*<script type="text/javascript" src="~/js/devextreme/dx.messages.en.js"></script>
+            <script type="text/javascript" src="~/js/devextreme/supplemental.js"></script>
+            <script type="text/javascript" src="~/js/devextreme/en.js"></script>*@
+</head>
+<body>
+    @*<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CRC</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>*@
+    <div class="container">
+        @*<partial name="_CookieConsentPartial" />*@
+        <main role="main" class="pb-3">
+            @RenderBody()
+            @RenderSection("Scripts", required: false)
+        </main>
+    </div>
+</body>
+</html>

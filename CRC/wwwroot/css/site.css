@@ -1,0 +1,29 @@
+﻿.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.dx-list-item-content, .dx-list .dx-empty-message {
+    padding: 5px 0;
+}
+
+.dx-list-item, .dx-list .dx-empty-message {
+    border: 0;
+}
+
+.card {
+    margin-bottom: 0px;
+}
+
+.dx-list-item:first-of-type {
+    border: 0;
+}
+
+.card__face:hover .card__face__colored-side {
+    width: 14px;
+}
+
+.card__face:hover .card__face__price {
+    color: #fff;
+    color: #555A5F;
+}

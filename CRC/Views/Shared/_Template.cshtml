@@ -1,0 +1,259 @@
+﻿@model CRC.Models.Output
+
+<style>
+    .demo-container {
+        display: flex;
+        justify-content: center;
+        height: 450px;
+        padding: 30px;
+    }
+
+    .form-container {
+        /*width: 600px;*/
+        padding: 50px;
+        align-self: center;
+    }
+
+    .buttons-column > .column-header {
+        flex-grow: 0;
+        width: 150px;
+        height: 35px;
+        font-size: 130%;
+        opacity: 0.6;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+        .buttons > div {
+            width: 300px;
+            flex-wrap: nowrap;
+            display: flex;
+        }
+
+    .buttons-column > div {
+        width: 150px;
+        height: 50px;
+        text-align: center;
+    }
+
+    .buttons-column {
+        width: 150px;
+        justify-content: center;
+    }
+</style>
+
+<style>
+    .widget-container {
+        /*margin-right: 320px;*/
+        padding: 20px;
+        /*max-width: 950px;*/
+        min-width: 300px;
+    }
+
+    #form {
+        margin-top: 25px;
+    }
+
+    .options {
+        padding: 20px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 260px;
+        top: 0;
+        background-color: rgba(191, 191, 191, 0.15);
+    }
+
+    .caption {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .option {
+        margin-top: 10px;
+    }
+</style>
+
+<style>
+    #grid {
+    height: 500px;
+}
+
+.options {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: rgba(191, 191, 191, 0.15);
+}
+
+.caption {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.option {
+    margin-top: 10px;
+}
+
+    .option > span {
+        margin-right: 10px;
+    }
+
+    .option > .dx-widget {
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>
+
+<div style="padding: 30px;">
+    @*<div>Select company:</div>*@
+    @*@(Html.DevExtreme().SelectBox()
+        .DisplayExpr("Name")
+        .DataSource(d => d.Mvc().LoadAction("GetCompanies").Key("ID"))
+        .Value(1)
+        .OnValueChanged("selectBox_valueChanged")
+    )*@
+    @(Html.DevExtreme().Form()
+        .ID("form")
+        .ColCount(6)
+        .FormData(Model)
+        .LabelLocation(FormLabelLocation.Top)
+        .MinColWidth(300)
+        .ReadOnly(false)
+        .ShowColonAfterLabel(true)
+    )
+</div>
+
+<div style="float: right;">
+    <div style="float: left;">
+        @(Html.DevExtreme().Button()
+            .Text(ButtonStylingMode.Contained.ToString())
+            .Type(ButtonType.Success)
+            .StylingMode(ButtonStylingMode.Contained)
+            .Width(120)
+            .OnClick("notify")
+        )
+    </div>
+                
+    <div style="float: right;">
+        @(Html.DevExtreme().Button()
+            .Text(ButtonStylingMode.Contained.ToString())
+            .Type(ButtonType.Danger)
+            .StylingMode(ButtonStylingMode.Contained)
+            .Width(120)
+            .OnClick("notify")
+        )
+    </div>
+</div>
+
+
+@(Html.DevExtreme().SpeedDialAction()
+    .ID("action-add")
+    .Icon("add")
+    .Label("Add row")
+    .Index(1)
+    .OnClick("addRow")
+)
+
+@(Html.DevExtreme().SpeedDialAction()
+    .ID("action-remove")
+    .Icon("trash")
+    .Visible(false)
+    .Label("Delete row")
+    .Index(2)
+    .OnClick("deleteRow")
+)
+
+@(Html.DevExtreme().SpeedDialAction()
+    .ID("action-edit")
+    .Icon("edit")
+    .Visible(false)
+    .Label("Edit row")
+    .Index(3)
+    .OnClick("editRow")
+)
+
+<div id="action-remove"></div>
+<div id="action-edit"></div>
+
+
+
+
+
+<script>
+    function notify(e) {
+        var buttonText = e.component.option("text");
+        DevExpress.ui.notify("The " + buttonText + " button was clicked");
+    }
+</script>
+
+<script>
+    function getFormInstance() {
+        return $("#form").dxForm("instance");
+    }
+
+    function selectBox_valueChanged(data) {
+        getFormInstance().option("formData", data.value);
+    }
+
+    function labelLocation_changed(data) {
+        getFormInstance().option("labelLocation", data.value);
+    }
+
+    function colCount_changed(data) {
+        getFormInstance().option("colCount", data.value);
+    }
+
+    function minColWidth_changed(data) {
+        getFormInstance().option("minColWidth", data.value);
+    }
+
+    function formWidth_changed(data) {
+        getFormInstance().option("width", data.value);
+    }
+
+    function readOnly_changed(data) {
+        getFormInstance().option("readOnly", data.value);
+    }
+
+    function showColonAfterLabel_changed(data) {
+        getFormInstance().option("showColonAfterLabel", data.value);
+    }
+</script>
+
+
+<script>
+    var selectedRowIndex = -1;
+
+    var selectionChanged = function (e) {
+        selectedRowIndex = e.component.getRowIndexByKey(e.selectedRowKeys[0]);
+
+        $("#action-remove").dxSpeedDialAction("instance").option("visible", selectedRowIndex !== -1);
+        $("#action-edit").dxSpeedDialAction("instance").option("visible", selectedRowIndex !== -1);
+    }
+
+    var getGridInstance = function() {
+        return $("#grid").dxDataGrid("instance");
+    }
+
+    var addRow = function () {
+        getGridInstance().addRow();
+        getGridInstance().deselectAll();
+    }
+
+    var deleteRow = function () {
+        getGridInstance().deleteRow(selectedRowIndex);
+        getGridInstance().deselectAll();
+    }
+
+    var editRow = function () {
+        getGridInstance().editRow(selectedRowIndex);
+        getGridInstance().deselectAll();
+    }
+
+</script>

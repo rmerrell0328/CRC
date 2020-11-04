@@ -1,0 +1,65 @@
+﻿<style>
+    #button-cabletype {
+        margin-top: 50px;
+        /*margin-right: 20px;*/
+        float: right;
+    }
+
+    .dx-fieldset {
+        margin: 0; /*30px 20px;*/
+        padding: 0;
+    }
+</style>
+
+<div class="dx-fieldset">
+    <div class="dx-field">
+
+            @(Html.DevExtreme().SelectBox()
+                .ID("cabletypes")
+                .Name("nmcabletypes")
+                .Placeholder("Select a Cable Type")
+                .DisplayExpr("text")
+                .DataSource(d => d.Mvc().Controller("Menu").LoadAction("GetCableTypes").Key("text"))
+                //.OnValueChanged("onCableValChange")
+            )
+
+    </div>
+</div>
+
+
+<script>
+
+    $(function () {
+
+        $("#button-cabletype").dxButton({
+            text: "Add Cable",
+            type: "success",
+            stylingMode: "contained",
+            onClick: function () {
+                //DevExpress.ui.dialog.alert("Uncomment the line to enable sending a form to the server.", "Click Handler");
+              
+                var cbl = returnCables();
+                //var dev = returnDevices();
+
+                objCbl = cbl.option("value")
+                //objDev = dev.option("value")
+
+                if (objCbl) {
+                    //console.log('adding cable type')
+                    addItem(objCbl.text, objCbl);
+                }
+
+                //if (objDev) {
+                //    //console.log('adding passive device')
+                //    addItem(objDev.text, objDev);
+
+                //}
+                //console.log("recalc");
+                recalc();
+                $("#popup-cable").dxPopup("instance").hide();
+
+            }
+        });
+
+    });
+</script>

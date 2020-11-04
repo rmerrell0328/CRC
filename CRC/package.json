@@ -1,0 +1,21 @@
+{
+  "name": "crc",
+  "version": "1.0.0",
+  "description": "Cable Run Calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "crc",
+    "cable",
+    "run",
+    "calculator"
+  ],
+  "author": "Josh Routin",
+  "license": "ISC",
+  "dependencies": {
+    "devextreme": "19.2.4",
+    "devextreme-aspnet-data": "^2.5.1"
+  }
+}

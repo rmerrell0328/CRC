@@ -1,0 +1,191 @@
+﻿@{
+    ViewData["Title"] = "Mobile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div class="phone" ng-app="delivcard">
+    <div class="phone__screen">
+        <div class="phone__scroll-cont">
+            <div class="phone__content" ng-controller="DelivCtrl">*@
+
+<div id="defaultlist">
+    <script type="text/html" id="defaultlist-template">
+
+        <section id="tap-header" ng-repeat="card in cards"
+                 class="card theme-green"
+                 data-color="{{card.themeColorHex}}">
+
+            @*THIS IS THE MAIN CARD VIEW*@
+            <section class="card__part card__part-2">
+
+                <div class="card__part__side m--back">
+                    <div class="card__part__inner card__face">
+                        <div class="card__face__colored-side"></div>
+                        <h3 class="card__face__price"><%= text %></h3>
+
+                        <div class="card__face__adtl card__face__adtl--req">
+                            CH 117 – 753Mhz
+                            <p><%= high %></p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--pledge">
+                            &nbsp;
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--weight">
+                            CH 4 – 69Mhz
+                            <p><%= low %></p>
+                        </div>
+
+                        <div class="card__face__adtl card__face__adtl--xmitlow">
+                            Xmit High
+                            <p><%= xmitHigh %></p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--xmithigh">
+                            &nbsp;
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </script>
+</div>
+
+<div id="list">
+    <script type="text/html" id="list-template">
+
+        <section id="adtl-devices" ng-repeat="card in cards"
+                 class="card theme-orange"
+                 data-color="{{card.themeColorHex}}">
+
+            @*THIS IS THE MAIN CARD VIEW*@
+            <section class="card__part card__part-2">
+
+                <div class="card__part__side m--back">
+                    <div class="card__part__inner card__face">
+                        <div class="card__face__colored-side"></div>
+                        <div class="card__face__price">
+                            <%= text %>
+                            <div style="float: right;"><%= checkType(type, length) %></div> @*length*@
+                        </div>
+
+                        <div class="card__face__adtl card__face__adtl--req">
+                            CH 117 – 753Mhz
+                            <p><%= high %></p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--pledge">
+                            &nbsp;
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--weight">
+                            CH 4 – 69Mhz
+                            <p><%= low %></p>
+                        </div>
+
+                        <div class="card__face__adtl card__face__adtl--xmitlow">
+                            Xmit High
+                            <p><%= xmitHigh %></p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--xmithigh">
+                            &nbsp;
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </script>
+</div>
+
+<div id="sumtotal">
+    <script type="text/html" id="sumtotal-template">
+
+        <section id="final-output" ng-repeat="card in cards"
+                 class="card theme-red"
+                 data-color="{{card.themeColorHex}}">
+
+            @*THIS IS THE MAIN CARD VIEW*@
+            <section class="card__part card__part-2">
+
+                <div class="card__part__side m--back">
+                    <div class="card__part__inner card__face">
+                        <div class="card__face__colored-side"></div>
+                        <h3 class="card__face__price"><%= text %></h3>
+                        @*<div class="card__face__divider"></div>*@
+
+                        <div class="card__face__adtl card__face__adtl--req">
+                            CH 117 – 753Mh
+                            <p><%= high %></p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--pledge">
+                            &nbsp;
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--weight">
+                            CH 4 – 69Mhz
+                            <p><%= low %></p>
+                        </div>
+
+                        <div class="card__face__adtl card__face__adtl--xmitlow">
+                            Xmit High
+                            <p><%= xmitHigh %></p>
+                        </div>
+                        <div class="card__face__adtl card__face__adtl--xmithigh">
+                            &nbsp;
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </script>
+</div>
+
+@*</div>
+            </div>
+        </div>
+    </div>*@
+
+@*<div id="button-options"></div>*@
+@*<div id="top-sheet"></div>*@
+<div id="action-sheet"></div>
+
+<div id="popup-tap">
+    <div id='taphtmlhere'></div>
+    <div id="button-tap"></div>
+</div>
+
+<div id="popup-length">
+    <div id='lengthhtmlhere'></div>
+    <div id="button-form"></div>
+</div>
+
+<div id="popup-cable">
+    <div id='cabletypehtmlhere'></div>
+    <div id="button-cabletype"></div>
+</div>
+
+<div id="popup-device">
+    <div id='devicetypehtmlhere'></div>
+    <div id="button-devicetype"></div>
+</div>
+
+<div id="action-add-cable"></div>
+<div id="action-add-passive"></div>
+
+@(Html.DevExtreme().Popup())
+
+<script>
+    function checkType(type, length) {
+        var formattedLength = "";
+        //if (length == 0) {
+        //    length = 100
+        //}
+        if (type == "Cable") {
+            formattedLength = length + " ft."
+           
+        }
+       
+        return formattedLength;
+    }
+</script>

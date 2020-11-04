@@ -1,0 +1,150 @@
+﻿<style>
+    #button-tap {
+        margin-top: 50px;
+        /*margin-right: 20px;*/
+        float: right;
+    }
+
+    .dx-fieldset {
+        margin: 0; /*30px 20px;*/
+        padding: 0;
+    }
+</style>
+
+@*<div id="form-tap"></div>*@
+
+@*<div class="dx-fieldset">
+        <div class="dx-field">
+            <div class="dx-field-label">High</div>
+            <div class="dx-field-value" id="tap-high"></div>
+        </div>
+        <div class="dx-field">
+            <div class="dx-field-label">Mid</div>
+            <div class="dx-field-value">
+                <div  id="tap-high"></div>
+            </div>
+        </div>
+        <div class="dx-field">
+            <div class="dx-field-label">Low</div>
+            <div class="dx-field-value" id="tap-high"></div>
+        </div>
+        <div class="dx-field">
+            <div class="dx-field-label">Xmit High</div>
+            <div class="dx-field-value" id="tap-high"></div>
+        </div>
+        <div class="dx-field">
+            <div class="dx-field-label">Xmit Low</div>
+            <div class="dx-field-value" id="tap-high"></div>
+        </div>
+    </div>*@
+
+<div class="dx-fieldset">
+    <div class="dx-field">
+        <div class="dx-field-label">CH 117 – 753Mhz</div>
+        <div class="dx-field-value">
+            @(Html.DevExtreme().NumberBox()
+                        .ID("tapHigh")
+                        .Name("nmtaphigh")
+                        .Placeholder("Enter a value (dBmV)")
+                        .OnEnterKey("submitForm")
+                    //.OnKeyPress("checkClear")
+            )
+        </div>
+    </div>
+
+    <div class="dx-field">
+        <div class="dx-field-label">CH 4 – 69Mhz</div>
+        <div class="dx-field-value">
+            @(Html.DevExtreme().NumberBox()
+                        .ID("tapLow")
+                        .Name("nmtaplow")
+                        .Placeholder("Enter a value (dBmV)")
+                        .OnEnterKey("submitForm")
+                    //.OnKeyDown("checkClear")
+            )
+        </div>
+    </div>
+    <div class="dx-field">
+        <div class="dx-field-label">Xmit High</div>
+        <div class="dx-field-value">
+            @(Html.DevExtreme().NumberBox()
+                        .ID("tapXmitHigh")
+                        .Name("nmtapxmithigh")
+                        .Placeholder("Enter a value (dBmV)")
+                        .OnEnterKey("submitForm")
+                    //.OnKeyDown("checkClear")
+            )
+        </div>
+    </div>
+    <div class="dx-field">
+        <div class="dx-field-label"></div>
+        <div class="dx-field-value">
+            @(Html.DevExtreme().NumberBox()
+                        .ID("tapXmitLow")
+                        .Name("nmtapxmitlow")
+                        .Placeholder("Enter a value (dBmV)")
+                        .OnEnterKey("submitForm")
+                    .Visible(false)
+                    //.OnKeyDown("checkClear")
+            )
+        </div>
+    </div>
+
+</div>
+<div class="dx-field">
+    <div class="dx-field-label"></div>
+    <div class="dx-field-value">
+        @(Html.DevExtreme().NumberBox()
+                    .ID("tapMid")
+                    .Name("nmtapmid")
+                    .Placeholder("Enter a value (dBmV)")
+                    .OnEnterKey("submitForm")
+                    .Visible(false)
+                //.OnKeyDown("checkClear")
+        )
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        $("#button-tap").dxButton({
+            text: "Apply",
+            type: "success",
+            stylingMode: "contained",
+            onClick: function () {
+                var nhigh = $('#tapHigh').dxNumberBox('instance').option('value');
+                var nmid = $('#tapMid').dxNumberBox('instance').option('value');
+                var nlow = $('#tapLow').dxNumberBox('instance').option('value');
+                var nxmitHigh = $('#tapXmitHigh').dxNumberBox('instance').option('value');
+                var nxmitLow = $('#tapXmitLow').dxNumberBox('instance').option('value');
+
+                var listItems = $('#defaultlist').dxList("instance").getDataSource().items();
+                var listItem = listItems[0];
+
+                var newTap = copyRow(listItem);
+
+                newTap.high = nhigh * 1;
+                newTap.mid = nmid * 1;
+                newTap.low = nlow * 1;
+                newTap.xmitHigh = nxmitHigh * 1;
+                newTap.xmitLow = nxmitLow * 1;
+
+                tapStoreOrig.update(updateRow.id, {
+                    high: nhigh * 1,
+                    mid: nmid * 1,
+                    low: nlow * 1,
+                    xmitHigh: nxmitHigh * 1,
+                    xmitLow: nxmitLow * 1,
+                });
+
+                $('#defaultlist').dxList("instance").option("dataSource", tapStoreOrig);
+                $('#defaultlist').dxList("instance").reload();
+                recalc();
+                $("#popup-tap").dxPopup("instance").hide();
+            }
+        });
+
+    });
+</script>

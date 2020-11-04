@@ -1,0 +1,53 @@
+﻿<style>
+    #button-form {
+        margin-top: 50px;
+        /*margin-right: 20px;*/
+        float: right;
+    }
+
+    .dx-fieldset {
+        margin: 0; /*30px 20px;*/
+        padding: 0;
+    }
+</style>
+
+<div class="dx-fieldset">
+    <div class="dx-field">
+
+        @(Html.DevExtreme().NumberBox()
+            .ID("cablelengths")
+            .Name("nmcablelengths")
+            .Value(100)
+            .Placeholder("Enter a length (feet)")
+            .OnEnterKey("submitLength")
+        )
+          
+    </div>
+</div>
+
+
+<script>
+
+    $(function () {
+
+        $("#button-form").dxButton({
+            text: "Apply",
+            type: "success",
+            stylingMode: "contained",
+            onClick: function () {
+                var value = $('#cablelengths').dxNumberBox('instance').option('value');
+                updateRow.length = value * 1;
+
+                store.update(updateRow.id, { length: value * 1 })
+                    .done(function () {
+                        getList().reload();
+                        $("#popup-length").dxPopup("instance").hide();
+                    })
+                    .fail(function () {
+                    });
+
+            }
+        });
+
+    });
+</script>
